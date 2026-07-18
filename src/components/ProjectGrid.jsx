@@ -68,7 +68,13 @@ export default function ProjectGrid() {
       {/* Symmetrical 2x2 Infrastructure Grid Layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {infrastructureProjects.map((project, index) => (
-          <div key={index} className="group relative rounded-lg border border-[#c8b4a0]/10 bg-black/40 p-6 backdrop-blur-md transition-all duration-300 hover:border-[#c8b4a0]/40 hover:shadow-[0_0_20px_rgba(200,180,160,0.15)]">
+          <a 
+            key={index} 
+            href={project.link} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="block group relative rounded-lg border border-[#c8b4a0]/10 bg-black/40 p-6 backdrop-blur-md transition-all duration-300 hover:border-[#c8b4a0]/40 hover:shadow-[0_0_20px_rgba(200,180,160,0.15)] cursor-pointer"
+          >
             <h3 className="text-lg font-medium text-[#f8f7f5] transition-colors group-hover:text-[#c8b4a0]">
               {project.title}
             </h3>
@@ -82,10 +88,10 @@ export default function ProjectGrid() {
                 </span>
               ))}
             </div>
-            <a href={project.link} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center gap-1 text-xs font-mono uppercase tracking-wider text-[#c8b4a0] opacity-80 hover:opacity-100 transition-opacity">
+            <div className="mt-6 inline-flex items-center gap-1 text-xs font-mono uppercase tracking-wider text-[#c8b4a0] opacity-80 group-hover:opacity-100 transition-opacity">
               View Code &rarr;
-            </a>
-          </div>
+            </div>
+          </a>
         ))}
       </div>
     </section>

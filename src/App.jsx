@@ -1,5 +1,5 @@
 import ProjectGrid from "./components/ProjectGrid";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const colors = {
   50: "#f8f7f5",
@@ -16,9 +16,20 @@ const colors = {
 
 export default function App() {
   const gradientRef = useRef(null);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    // 1. Animate words fluidly with correct CSS rules
+    // 1. Scroll monitoring event to hide indicator cleanly
+    const handleScroll = () => {
+      if (window.scrollY > 40) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    // 2. Animate words fluidly with correct CSS rules
     const words = document.querySelectorAll(".word");
     words.forEach((word) => {
       const delay = parseInt(word.getAttribute("data-delay") || "0", 10);
@@ -27,7 +38,7 @@ export default function App() {
       }, delay);
     });
 
-    // 2. Interactive mouse tracker glow canvas
+    // 3. Interactive mouse tracker glow canvas
     const gradient = gradientRef.current;
     function onMouseMove(e) {
       if (gradient) {
@@ -42,7 +53,7 @@ export default function App() {
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseleave", onMouseLeave);
 
-    // 3. Premium text hover micro-interactions
+    // 4. Premium text hover micro-interactions
     words.forEach((word) => {
       word.addEventListener("mouseenter", () => {
         word.style.textShadow = "0 0 20px rgba(200, 180, 160, 0.6)";
@@ -56,7 +67,7 @@ export default function App() {
       });
     });
 
-    // 4. Click radial wave ripple element logic
+    // 5. Click radial wave ripple element logic
     function onClick(e) {
       const ripple = document.createElement("div");
       ripple.className = "click-ripple";
@@ -68,6 +79,7 @@ export default function App() {
     document.addEventListener("click", onClick);
 
     return () => {
+      window.removeEventListener("scroll", handleScroll);
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseleave", onMouseLeave);
       document.removeEventListener("click", onClick);
@@ -76,7 +88,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#1a1d18] via-black to-[#2a2e26] text-[#e6e1d7] overflow-x-hidden relative w-full flex flex-col">
-      {/* Missing Global CSS Animation Engine */}
+      {/* Dynamic Global CSS Animation Engine */}
       <style>{`
         .word { opacity: 0; display: inline-block; margin-right: 0.25em; transition: all 0.3s ease; transform: translateY(15px); }
         @keyframes word-appear { to { opacity: 1; transform: translateY(0); } }
@@ -95,6 +107,35 @@ export default function App() {
 
         .click-ripple { position: fixed; width: 4px; height: 4px; background: rgba(200, 180, 160, 0.4); border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; animation: pulse-glow 1s cubic-bezier(0.1, 0.8, 0.3, 1) forwards; }
         @keyframes pulse-glow { to { width: 150px; height: 150px; opacity: 0; border: 1px solid rgba(200,180,160,0); } }
+
+        /* Structural Blueprint for Scroll Arrow System */
+        .scroll-hint {
+          position: absolute;
+          bottom: 2.5rem;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.5rem;
+          pointer-events: none;
+          z-index: 40;
+          opacity: 0;
+          animation: fade-in 1s forwards;
+          animation-delay: 4s; /* Matches typography completion perfectly */
+          transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s ease;
+        }
+        .scroll-hint.hidden-node {
+          opacity: 0 !important;
+          transform: translate(-50%, 15px);
+        }
+        @keyframes custom-bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(6px); }
+        }
+        .bounce-arrow {
+          animation: custom-bounce 2s infinite ease-in-out;
+        }
       `}</style>
 
       {/* SVG Background Layer */}
@@ -133,7 +174,7 @@ export default function App() {
       {/* Main Responsive Content Flow */}
       <div className="relative z-10 flex-grow flex flex-col">
         {/* Hero Area */}
-        <div className="min-h-screen flex flex-col justify-center items-center px-6 text-center select-none">
+        <div className="min-h-screen flex flex-col justify-center items-center px-6 text-center select-none relative">
           <h2 className="text-xs md:text-sm font-mono font-light uppercase tracking-[0.25em] opacity-70" style={{ color: colors[200] }}>
             <span className="word" data-delay="100">Welcome</span>
             <span className="word" data-delay="250">To</span>
@@ -162,6 +203,24 @@ export default function App() {
             <span className="word" data-delay="3600">cloud</span>
             <span className="word" data-delay="3800">architectures.</span>
           </p>
+
+          {/* Integrated UI Discovery System */}
+          <div className={`scroll-hint ${scrolled ? "hidden-node" : ""}`}>
+            <span className="text-[10px] font-mono tracking-[0.3em] uppercase opacity-40" style={{ color: colors[100] }}>
+              Explore Platform
+            </span>
+            <svg 
+              className="w-5 h-5 bounce-arrow opacity-60" 
+              fill="none" 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth="1.5" 
+              viewBox="0 0 24 24" 
+              stroke={colors[200]}
+            >
+              <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+          </div>
         </div>
 
         {/* Project Grid Section (Scrollable Area) */}

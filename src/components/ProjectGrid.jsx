@@ -30,7 +30,7 @@ const infrastructureProjects = [
     title: "GCP Enterprise Resource Hierarchy",
     description: "Automated Google Cloud landing zone enforcing programmatic Organization Policies and segregated multi-tenant folders.",
     tech: ["GCP", "Terraform", "Governance", "IAM"],
-    link: "https://github.com/Porterman66/gcp-landing-zone",
+    link: "https://github.com/Porterman66/gcp-enterprise-core",
   }
 ];
 

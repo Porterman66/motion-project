@@ -111,13 +111,13 @@ export default function App() {
         /* Structural Blueprint for Scroll Arrow System */
         .scroll-hint {
           position: absolute;
-          bottom: 2.5rem;
+          bottom: 5.5rem; /* Elevated vertically to sit cleanly above system toolbars */
           left: 50%;
           transform: translateX(-50%);
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.75rem; /* Enhanced spatial padding */
           pointer-events: none;
           z-index: 40;
           opacity: 0;
@@ -130,8 +130,8 @@ export default function App() {
           transform: translate(-50%, 15px);
         }
         @keyframes custom-bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(6px); }
+          0%, 100% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(8px) scale(1.05); } /* Balanced motion path metrics */
         }
         .bounce-arrow {
           animation: custom-bounce 2s infinite ease-in-out;
@@ -206,15 +206,15 @@ export default function App() {
 
           {/* Integrated UI Discovery System */}
           <div className={`scroll-hint ${scrolled ? "hidden-node" : ""}`}>
-            <span className="text-[10px] font-mono tracking-[0.3em] uppercase opacity-40" style={{ color: colors[100] }}>
+            <span className="text-xs font-mono tracking-[0.35em] uppercase opacity-50" style={{ color: colors[100] }}>
               Explore Platform
             </span>
             <svg 
-              className="w-5 h-5 bounce-arrow opacity-60" 
+              className="w-7 h-7 bounce-arrow opacity-70" 
               fill="none" 
               strokeLinecap="round" 
               strokeLinejoin="round" 
-              strokeWidth="1.5" 
+              strokeWidth="1.75" 
               viewBox="0 0 24 24" 
               stroke={colors[200]}
             >

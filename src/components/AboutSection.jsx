@@ -1,7 +1,7 @@
 ﻿import React from "react";
 
 const certifications = [
-  "AWS Certified Solutions Architect – Associate",
+  "AWS Certified Solutions Architect - Associate",
   "Google Cloud Associate Cloud Engineer",
   "CompTIA Security+",
 ];
@@ -22,13 +22,13 @@ export default function AboutSection() {
       <div className="group relative rounded-lg border border-[#c8b4a0]/20 bg-gradient-to-r from-black/60 to-[#c8b4a0]/5 p-8 md:p-12 backdrop-blur-md transition-all duration-300 hover:border-[#c8b4a0]/40">
         <p className="text-sm md:text-base font-light leading-relaxed text-[#e6e1d7]/80 max-w-3xl mx-auto text-center">
           I run multi-cloud infrastructure the way a control room runs a plant floor
-          — watching the metrics, catching drift before it becomes downtime, and
+          - watching the metrics, catching drift before it becomes downtime, and
           keeping cost and risk in view at all times.
         </p>
 
         <p className="mt-6 text-sm md:text-base font-light leading-relaxed text-[#e6e1d7]/60 max-w-3xl mx-auto text-center">
           Five years of concurrent multi-cloud engineering across AWS, Azure, and
-          GCP, on top of 15+ years in enterprise IT and technical operations —
+          GCP, on top of 15+ years in enterprise IT and technical operations -
           including keeping 5,000+ networked payment endpoints at 99%+ uptime
           earlier in my career. Every project below is something I built and
           operate myself.
@@ -46,7 +46,7 @@ export default function AboutSection() {
         </div>
 
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          
+          <a
             href="https://cloud-dashboard-topaz.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
@@ -54,7 +54,7 @@ export default function AboutSection() {
           >
             View Live Dashboard &rarr;
           </a>
-          
+          <a
             href="/resume/Martin_Paszkowski_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"

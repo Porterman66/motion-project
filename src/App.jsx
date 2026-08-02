@@ -1,4 +1,5 @@
 import ProjectGrid from "./components/ProjectGrid";
+import AboutSection from "./components/AboutSection";
 import React, { useEffect, useRef, useState } from "react";
 
 const colors = {
@@ -223,8 +224,9 @@ export default function App() {
           </div>
         </div>
 
-        {/* Project Grid Section (Scrollable Area) */}
+        {/* About + Project Grid Section (Scrollable Area) */}
         <div className="pb-24">
+          <AboutSection />
           <ProjectGrid />
         </div>
       </div>

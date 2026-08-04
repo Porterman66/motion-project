@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React, { useState } from "react";
 
 const certifications = [
   "AWS Certified Solutions Architect - Associate",
@@ -6,7 +6,36 @@ const certifications = [
   "CompTIA Security+",
 ];
 
+const skillCategories = [
+  {
+    label: "Cloud Platforms",
+    items: ["AWS (EC2, S3, IAM, VPC, CloudWatch, CloudTrail)", "Microsoft Azure (Hybrid Admin, M365)", "Google Cloud Platform (GKE, Billing, IAM)"],
+  },
+  {
+    label: "Containers & IaC",
+    items: ["Docker", "Kubernetes (GKE, Helm, Ingress)", "Terraform"],
+  },
+  {
+    label: "Cloud Governance & FinOps",
+    items: ["Resource tagging & rightsizing", "Lifecycle management", "Cost visibility & reporting"],
+  },
+  {
+    label: "Security & Compliance",
+    items: ["IAM", "ISO 27001 / PCI DSS practices", "Microsoft Sentinel, Splunk"],
+  },
+  {
+    label: "Scripting & Tooling",
+    items: ["Python (pandas, openpyxl)", "Bash, PowerShell", "Java, JavaScript"],
+  },
+  {
+    label: "Networking & Security",
+    items: ["TCP/IP, VPN, VLANs", "Firewalls", "Routing & Switching"],
+  },
+];
+
 export default function AboutSection() {
+  const [showSkills, setShowSkills] = useState(false);
+
   return (
     <section className="relative z-10 w-full max-w-5xl mx-auto px-8 py-16">
       <div className="text-center mb-16">
@@ -54,16 +83,59 @@ export default function AboutSection() {
           >
             View Live Dashboard &rarr;
           </a>
-          <a
-            href="/resume/Martin_Paszkowski_Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => setShowSkills(true)}
             className="inline-flex items-center gap-1 text-xs font-mono uppercase tracking-wider text-[#e6e1d7]/80 opacity-90 hover:opacity-100 hover:text-[#c8b4a0] transition-all border border-[#c8b4a0]/10 rounded px-5 py-2.5 hover:border-[#c8b4a0]/40"
           >
-            Download Resume &rarr;
-          </a>
+            View Skill Set &rarr;
+          </button>
         </div>
       </div>
+
+      {showSkills && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-6"
+          onClick={() => setShowSkills(false)}
+        >
+          <div
+            className="relative w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-lg border border-[#c8b4a0]/30 bg-[#1a1d18] p-8 md:p-10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setShowSkills(false)}
+              className="absolute top-4 right-5 text-[#c8b4a0] text-lg opacity-70 hover:opacity-100 transition-opacity"
+              aria-label="Close"
+            >
+              &times;
+            </button>
+
+            <span className="text-[10px] font-mono tracking-widest uppercase text-[#c8b4a0] opacity-60">
+              Technical Skill Set
+            </span>
+            <h3 className="mt-2 text-xl md:text-2xl font-extralight tracking-wider text-[#e6e1d7] uppercase">
+              Core Competencies
+            </h3>
+            <div className="mt-4 mb-8 w-12 h-px bg-[#c8b4a0] opacity-30"></div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {skillCategories.map((cat, i) => (
+                <div key={i}>
+                  <h4 className="text-xs font-mono uppercase tracking-wider text-[#c8b4a0] mb-2">
+                    {cat.label}
+                  </h4>
+                  <ul className="space-y-1">
+                    {cat.items.map((item, j) => (
+                      <li key={j} className="text-sm font-light text-[#e6e1d7]/70">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
